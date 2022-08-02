@@ -20,7 +20,7 @@ const testimonialsContaner = testimonialsSection.
 
 const sliderBtns = testimonialsSection.querySelectorAll(".slider-btn");
 const previousNextBtns = testimonialsSection.querySelectorAll(".control-btn");
-console.log(previousNextBtns)
+
 
 // Global variable
 let prevent = true; // Should the form get prevented from being submitted ?
@@ -182,7 +182,6 @@ function handlePreviousNextBtns() {
 
       if (counter % 4 === 0 && !breakpointsReached.includes(counter)) {
 
-        console.log("reached")
         breakpointsReached.unshift(counter);
         testimonialsContaner.innerHTML += testimonialsMarkup;
 
