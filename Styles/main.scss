@@ -2,27 +2,77 @@
 
 @use "../Styles/VM.scss" as *;
 
-/* Global */
+/* Root And Utilities */
 
 :root {
+
+  --clr-primary-700: hsl(233, 12%, 13%);
+  --clr-primary-500: hsl(228, 39%, 23%);
+
+  --clr-accent-500: hsl(12, 88%, 59%);
+  --clr-accent-300: hsl(12deg 95% 51% / 46%);
+  --clr-accent-100: hsl(13, 100%, 96%);
+
+  --clr-neutral-200: hsl(227, 12%, 61%);
+  --clr-neutral-100: hsl(0, 0%, 98%);
+
+  --bg-overlay-top: hsla(0, 0%, 100%, 0.4);
+  --bg-overlay-bottom: hsla(0, 0%, 0%, 0.5);
+
+
+  --ff-primary: 'Be Vietnam Pro', sans-serif;
+
+
   --testimonial-width: 500px;
   --testimonial-gap: 2rem;
 
   @include max-mq(1200px) {
     --testimonial-width: 350px;
   }
+
 }
+
+
+.text-primary-500 {
+  color: var(--clr-primary-500);
+}
+
+.text-neutral-200 {
+  color: var(--clr-neutral-200);
+}
+
+.bg-primary-700 {
+  background-color: var(--clr-primary-700)
+}
+
+.bg-accent-500 {
+  background-color: var(--clr-accent-500);
+}
+
+.bg-accent-100 {
+  background-color: var(--clr-accent-100);
+}
+
+.bg-neutral-100 {
+  background-color: var(--clr-neutral-100);
+}
+
+.bg-neutral-200 {
+  background-color: var(--clr-neutral-200);
+}
+
+/* Global */
 
 ::-webkit-scrollbar {
   width: 0.5em;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $brightRed;
+  background-color: var(--clr-accent-500);
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $darkBlue;
+  background-color: var(--clr-primary-700);
 }
 
 *,
@@ -71,7 +121,7 @@ img {
 }
 
 body {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: var(--ff-primary);
 }
 
 i,
@@ -83,7 +133,7 @@ button {
 /* Components */
 
 .container {
-  margin: auto;
+  margin-inline: auto;
   width: 95%;
 
   @include min-mq($mq) {
@@ -91,7 +141,7 @@ button {
   }
 }
 
-.flex {
+.flex-layout {
   display: flex;
   flex-direction: column;
   gap: 5rem;
@@ -124,13 +174,11 @@ button {
   }
 
   &__header {
-    color: $darkBlue;
     margin-bottom: .7rem;
     font-size: 2.5rem;
   }
 
   &__description {
-    color: $darkGrayishBlue;
     max-width: 450px;
     margin-right: auto;
     margin-left: auto;
@@ -145,15 +193,14 @@ button {
 .btn-regular {
   padding: .8rem 1.5rem;
   border-radius: 100vh;
-  color: $paleRed;
-  background-color: $brightRed;
-  box-shadow: 0 8px 15px $brightRedHover;
+  color: var(--clr-neutral-100);
+  box-shadow: 0 8px 15px var(--clr-accent-300);
   font-weight: 700;
   letter-spacing: 1px;
   transition-duration: .5s;
 
   &:hover {
-    background-color: $brightRedHover;
+    background-color: var(--clr-accent-300);
   }
 
 }
@@ -164,7 +211,7 @@ button {
 }
 
 /* Header */
-.header {
+.main-header {
   position: absolute;
   width: 100%;
   top: 0;
@@ -176,8 +223,8 @@ button {
     position: fixed;
     inset: 0;
     background-image: linear-gradient(to bottom,
-        $overlayTop,
-        $overlayBottom);
+        var(--bg-overlay-top),
+        var(--bg-overlay-bottom));
     z-index: 1;
     transition-duration: .5s;
 
@@ -197,7 +244,7 @@ button {
     z-index: 2;
   }
 
-  &__toggle-btn {
+  .nav-toggle-btn {
 
     @include min-mq($mq) {
       display: none;
@@ -233,7 +280,6 @@ button {
     padding-bottom: 2rem;
     border-radius: 5px;
     background-color: white;
-    color: $darkBlue;
     transition-duration: .5s;
     z-index: 3;
 
@@ -266,7 +312,7 @@ button {
       }
 
       &:hover {
-        color: $darkGrayishBlue;
+        color: var(--clr-neutral-200);
       }
     }
   }
@@ -292,7 +338,7 @@ main {
 
 }
 
-.main-section {
+.section--main {
   padding-top: 8rem;
   padding-bottom: 8rem;
   min-height: 100vh;
@@ -318,7 +364,7 @@ main {
   }
 }
 
-.sec-sections {
+.secondary-sections {
   overflow: hidden;
 
   section {
@@ -327,7 +373,7 @@ main {
   }
 
   /* Advantages Section */
-  .section-advantages {
+  .section--advantages {
 
     @include min-mq($mq) {
       width: 1100px;
@@ -335,17 +381,25 @@ main {
       margin-left: auto;
     }
 
+    // .section__intro {
+    //   margin: 0 auto 3rem;
+
+    //   @include min-mq($mq) {
+    //     margin-right: 0;
+    //     margin-left: 0;
+    //   }
+    // }
+
+
     .section__content {
       padding-left: 1rem;
 
-      .advantage__header {
+      .advantage__title {
         --fs: 1rem;
         position: relative;
-        background-color: $paleRed;
         margin-bottom: 1rem;
         padding: .75rem 0 .75rem 5rem;
         border-radius: 100vh 0 0 100vh;
-        color: $darkBlue;
         font-size: var(--fs);
 
         &::before {
@@ -357,7 +411,7 @@ main {
           @include flex-centering();
           border-radius: 100vh;
           padding: 0 1.5rem;
-          background-color: $brightRed;
+          background-color: var(--clr-accent-500);
           color: white;
           font-size: var(--fs);
         }
@@ -374,7 +428,6 @@ main {
       }
 
       .advantage__description {
-        color: $darkGrayishBlue;
         line-height: 2;
         opacity: .8;
         margin-bottom: 3rem;
@@ -383,7 +436,7 @@ main {
   }
 
   /* Testimonials Section */
-  .section-testimonials {
+  .section--testimonials {
 
     .section__intro {
       margin: 0 auto 5rem;
@@ -416,7 +469,6 @@ main {
         position: relative;
         padding: 4rem 1.5rem 2rem;
         border-radius: 10px;
-        background-color: $lightGray;
         transition-duration: .5s;
 
         &.active {
@@ -436,13 +488,11 @@ main {
           display: block;
           width: max-content;
           margin: 0 auto 1rem;
-          color: $darkBlue;
           font-weight: 700;
         }
 
         &__content {
           text-align: center;
-          color: $darkGrayishBlue;
           opacity: 1;
         }
       }
@@ -459,11 +509,11 @@ main {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        border: 1px solid $brightRed;
+        border: 1px solid var(--clr-accent-500);
         transition-duration: .5s;
 
         &.active {
-          background-color: $brightRed;
+          background-color: var(--clr-accent-500);
         }
       }
 
@@ -555,7 +605,6 @@ main {
 
   /* Pre Footer Section */
   .section-pre-footer {
-    background-color: $brightRed;
 
     .container {
       gap: 2rem;
@@ -578,10 +627,10 @@ main {
 
     .btn-regular {
       background-color: white;
-      color: $brightRed;
+      color: var(--clr-accent-500);
 
       &:hover {
-        color: $brightRedHover;
+        color: var(--clr-accent-300);
       }
     }
   }
@@ -591,7 +640,6 @@ main {
 .footer {
   padding-top: 3rem;
   padding-bottom: 4rem;
-  background-color: $veryDarkblue;
   color: white;
 
   .container {
@@ -605,7 +653,7 @@ main {
     }
   }
 
-  .form {
+  &__form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -634,20 +682,20 @@ main {
     }
   }
 
-  .links-container {
+  &__nav {
     width: 100%;
     display: flex;
     justify-content: space-around;
     margin: 3rem 0;
 
     li {
-      color: $paleRed;
+      color: var(--clr-neutral-100);
       opacity: .8;
       transition-duration: .5s;
 
 
       &:hover {
-        color: $brightRed;
+        color: var(--clr-accent-500);
       }
 
       +li {
@@ -656,7 +704,7 @@ main {
     }
   }
 
-  .social-links {
+  &__social-links {
     width: max-content;
     display: flex;
     gap: 1rem;
@@ -671,25 +719,24 @@ main {
       }
 
       &:hover path {
-        fill: $brightRed;
+        fill: var(--clr-accent-500);
       }
 
     }
   }
 
-  .logo {
+  &__logo {
     width: max-content;
     margin: 2rem auto;
   }
 
   .copyright {
     text-align: center;
-    color: $darkGrayishBlue;
     font-size: .8rem;
   }
 
   @include min-mq($mq) {
-    .form {
+    &__form {
       grid-area: form;
       align-self: flex-start;
       flex-wrap: nowrap;
@@ -700,17 +747,17 @@ main {
       }
     }
 
-    .links-container {
+    &__nav {
       grid-area: links;
       margin: 0;
     }
 
-    .logo {
+    &__logo {
       grid-area: logo;
       margin: 0;
     }
 
-    .social-links {
+    &__social-links {
       grid-area: social;
       align-self: end;
       margin: 0;

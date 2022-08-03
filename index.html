@@ -22,7 +22,7 @@
 <body>
 
   <!-- Header -->
-  <header class="header">
+  <header class="main-header">
 
     <!-- Nav Overlay -->
     <div class="nav-overlay"></div>
@@ -31,7 +31,7 @@
     <div class="container">
 
       <!-- Logo -->
-      <a href="/" class="header__logo" aria-label="Main Page">
+      <a href="/" class="logo" aria-label="Main Page">
         <svg xmlns="http://www.w3.org/2000/svg" width="146" height="24">
           <g fill="none" fill-rule="evenodd">
             <path fill="#242D52" fill-rule="nonzero"
@@ -46,7 +46,7 @@
       </a>
 
       <!-- Toggle Buttons -->
-      <button class="header__toggle-btn" aria-label="Toggle Button">
+      <button class="nav-toggle-btn" aria-label="Toggle Button" aria-controls="main-nav" aria-expanded="false">
         <svg xmlns=" http://www.w3.org/2000/svg" width="25" height="18" class="closed">
           <g fill="#242D52" fill-rule="evenodd">
             <path d="M0 0h25v4H0zM0 7h25v4H0zM0 14h25v4H0z" />
@@ -59,18 +59,18 @@
       </button>
 
       <!-- Nav -->
-      <nav class="main-nav">
+      <nav class="main-nav" id="main-nav">
         <ul class="main-nav__links">
-          <li><a href="#" aria-label="Pricing">Pricing</a></li>
-          <li><a href="#" aria-label="Product">Product</a></li>
-          <li><a href="#" aria-label="About Us">About Us</a></li>
-          <li><a href="#" aria-label="Careers">Careers</a></li>
-          <li><a href="#" aria-label="Community">Community</a></li>
+          <li class="text-primary-500"><a href="#" aria-label="Pricing">Pricing</a></li>
+          <li class="text-primary-500"><a href="#" aria-label="Product">Product</a></li>
+          <li class="text-primary-500"><a href="#" aria-label="About Us">About Us</a></li>
+          <li class="text-primary-500"><a href="#" aria-label="Careers">Careers</a></li>
+          <li class="text-primary-500"><a href="#" aria-label="Community">Community</a></li>
         </ul>
       </nav>
 
       <!-- Sign In Button -->
-      <button class="sign-in-btn btn-regular" aria-label="Get Started">
+      <button class="sign-in-btn btn-regular bg-accent-500" aria-label="Get Started">
         Get Started
       </button>
 
@@ -82,22 +82,22 @@
   <main class="main">
 
     <!-- Main Section => Home -->
-    <section class="main-section">
-      <div class="container flex">
+    <section class="section section--main">
+      <div class="container flex-layout">
 
         <!-- Section Image -->
         <img src="images/illustration-intro.png" alt="Statistics" class="main-section__img section-last">
 
         <!-- Section Intro -->
         <div class="section__intro">
-          <h1 class="section__intro__header">
+          <h1 class="section__intro__header text-primary-500">
             Bring everyone together to build better products.
           </h1>
-          <p class="section__intro__description text-fadded">
+          <p class="section__intro__description text-neutral-200 text-fadded">
             Manage makes it simple for software teams to plan day-to-day
             tasks while keeping the larger team goals in view.
           </p>
-          <button class="sign-in-btn btn-regular" aria-label="Get Started">
+          <button class="sign-in-btn btn-regular bg-accent-500" aria-label="Get Started">
             Get Started
           </button>
         </div>
@@ -106,17 +106,17 @@
     </section>
 
     <!-- Secondary Sections -->
-    <section class="sec-sections">
+    <section class="secondary-sections">
 
       <!-- Advantages Section -->
-      <section class="section-advantages flex">
+      <section class="section section--advantages flex-layout">
 
         <!-- Section Intro -->
         <div class="section__intro">
-          <h1 class="section__intro__header">
+          <h1 class="section__intro__header text-primary-500">
             What’s different about Manage?
           </h1>
-          <p class="section__intro__description text-fadded">
+          <p class="section__intro__description text-neutral-200 text-fadded">
             Manage provides all the functionality your team needs, without
             the complexity. Our software is tailor-made for modern digital
             product teams.
@@ -126,30 +126,30 @@
         <!-- Section Content -->
         <div class="section__content section-last">
           <div class="advantage">
-            <h2 class="advantage__header" data-order="01">
+            <h2 class="advantage__title bg-accent-100 text-primary-500" data-order="01">
               Track company-wide progress
             </h2>
-            <p class="advantage__description text-fadded">
+            <p class="advantage__description text-neutral-200 text-fadded">
               See how your day-to-day tasks fit into the wider vision. Go from
               tracking progress at the milestone level all the way done to the
               smallest of details. Never lose sight of the bigger picture again.
             </p>
           </div>
           <div class="advantage">
-            <h2 class="advantage__header" data-order="02">
+            <h2 class="advantage__title bg-accent-100 text-primary-500" data-order="02">
               Advanced built-in reports
             </h2>
-            <p class="advantage__description text-fadded">
+            <p class="advantage__description text-neutral-200 text-fadded">
               Set internal delivery estimates and track progress toward company
               goals. Our customisable dashboard helps you build out the reports
               you need to keep key stakeholders informed.
             </p>
           </div>
           <div class="advantage">
-            <h2 class="advantage__header" data-order="03">
+            <h2 class="advantage__title bg-accent-100 text-primary-500" data-order="03">
               Everything you need in one place
             </h2>
-            <p class="advantage__description text-fadded">
+            <p class="advantage__description text-neutral-200 text-fadded">
               Stop jumping from one service to another to communicate, store files,
               track tasks and share documents. Manage offers an all-in-one team
               productivity solution.
@@ -159,11 +159,11 @@
       </section>
 
       <!-- Testimonials Section -->
-      <section class="section-testimonials">
+      <section class="section section--testimonials">
 
         <!-- Section Intro -->
         <div class="section__intro">
-          <h2 class="section__intro__header">
+          <h2 class="section__intro__header text-primary-500">
             What they’ve said
           </h2>
         </div>
@@ -194,16 +194,16 @@
         </div>
 
         <!-- Get Started Button -->
-        <button class="sign-in-btn btn-regular" aria-label="Get Started">
+        <button class="sign-in-btn btn-regular bg-accent-500" aria-label="Get Started">
           Get Started
         </button>
 
       </section>
 
       <!-- Pre Footer Section -->
-      <section class="section-pre-footer">
+      <section class="section-pre-footer bg-accent-500">
 
-        <div class="container flex">
+        <div class="container flex-layout">
           <!-- Section Header -->
           <h2 class="section__header">
             Simplify how your team works today.
@@ -221,16 +221,16 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer bg-primary-700">
     <div class="container">
-      <form action="/" method="get" class="form">
+      <form action="/" method="get" class="footer__form">
         <input type="email" autocomplete="off" id="email-input" placeholder="Updates in your inbox…">
-        <button type="submit" aria-label="Submit" class="btn-regular">Go</button>
+        <button type="submit" aria-label="Submit" class="btn-regular bg-accent-500">Go</button>
         <p class="error-message">
           Please insert a valid email
         </p>
       </form>
-      <div class="links-container">
+      <div class="footer__nav">
         <ul class="col">
           <li><a href="#" aria-label="Home">Home</a></li>
           <li><a href="#" aria-label="Pricing">Pricing</a></li>
@@ -243,7 +243,7 @@
           <li><a href="#" aria-label="Privacy Policy">Privacy Policy</a></li>
         </ul>
       </div>
-      <ul class="social-links">
+      <ul class="footer__social-links">
         <li>
           <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
@@ -285,7 +285,7 @@
           </a>
         </li>
       </ul>
-      <div class="logo">
+      <div class="footer__logo">
         <svg xmlns="http://www.w3.org/2000/svg" width="146" height="24">
           <g fill="none" fill-rule="evenodd">
             <path fill="#FFF" fill-rule="nonzero"
@@ -298,7 +298,7 @@
           </g>
         </svg>
       </div>
-      <p class="copyright">
+      <p class="copyright text-neutral-200">
         Copyright 2020. All Rights Reserved
       </p>
     </div>

@@ -4,16 +4,16 @@
 import { testimonialsMarkup } from "./markup.js";
 
 // Getting elements form the document
-const navToggleBtn = document.querySelector(".header__toggle-btn");
+const navToggleBtn = document.querySelector(".nav-toggle-btn");
 const nav = document.querySelector(".main-nav");
 const navOverlay = document.querySelector(".nav-overlay");
 
-const emailForm = document.querySelector("footer form");
+const emailForm = document.querySelector("footer .footer__form");
 const emailInput = emailForm.querySelector("#email-input");
 const submitBtn = emailForm.querySelector("button");
 const errorMessage = emailForm.querySelector(".error-message");
 
-const testimonialsSection = document.querySelector(".section-testimonials ")
+const testimonialsSection = document.querySelector(".section--testimonials")
 const testimonialsContaner = testimonialsSection.
   querySelector(".section__content .container");
 
@@ -51,6 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function => Manage the nav and its overlay
 function manageNav() {
+
+  if (nav.classList.contains("opened")) {
+    navToggleBtn.ariaExpanded = "false";
+  } else {
+    navToggleBtn.ariaExpanded = "true";
+  }
 
   navOverlay.classList.toggle("show-up")
   navToggleBtn.classList.toggle("opened");
@@ -98,6 +104,14 @@ function handleResizing() {
     }
 
   }
+
+  if (nav.classList.contains("opened")) {
+    navToggleBtn.ariaExpanded = "true";
+  } else {
+    navToggleBtn.ariaExpanded = "false";
+  }
+
+
   testimonialsContaner.innerHTML = testimonialsMarkup;
 
   if (windowWidth > 768) {
