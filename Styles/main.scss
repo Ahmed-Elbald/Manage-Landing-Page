@@ -6,7 +6,7 @@
 
 :root {
   --testimonial-width: 500px;
-  --testimonial-gap: 32px;
+  --testimonial-gap: 2rem;
 
   @include max-mq(1200px) {
     --testimonial-width: 350px;

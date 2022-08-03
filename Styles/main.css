@@ -2,7 +2,7 @@
 /* Global */
 :root {
   --testimonial-width: 500px;
-  --testimonial-gap: 32px;
+  --testimonial-gap: 2rem;
 }
 @media (max-width: 1200px) {
   :root {
