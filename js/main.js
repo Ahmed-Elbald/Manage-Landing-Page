@@ -26,14 +26,6 @@ const nextBtn = testimonialsSection.querySelector(".next-btn");
 // Global variable
 let prevent = true; // Should the form get prevented from being submitted ?
 
-// For tracking the slider
-let counter = 0;
-let breakpointsReached = [];
-
-// The width of the testimonial box
-let testimonialValues,
-  testimonialWidth,
-  testimonialGap;
 
 
 // Handling the first load of the page
@@ -89,16 +81,6 @@ function checkInput() {
 // Function => Handling how different elements are going to appear on different screen sizes
 function handleResizing() {
 
-  testimonialValues = window.getComputedStyle(document.documentElement);
-  testimonialWidth = parseInt(
-    testimonialValues.getPropertyValue(
-      "--testimonial-width"
-    )
-  );
-  testimonialGap = parseInt(
-    testimonialValues.getPropertyValue("--testimonial-gap")
-  );
-
   let windowWidth = window.innerWidth;
 
   if (windowWidth > 1200) {
@@ -119,12 +101,6 @@ function handleResizing() {
   testimonialsContaner.innerHTML = testimonialsMarkup;
 
   if (windowWidth > 768) {
-
-    // for (let i = 0; i < 3; i++) {
-
-    //   testimonialsContaner.innerHTML += testimonialsMarkup;
-
-    // }
 
     testimonialsSection.classList.add("desktop");
 
