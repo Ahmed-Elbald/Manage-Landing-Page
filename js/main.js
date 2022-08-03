@@ -19,7 +19,8 @@ const testimonialsContaner = testimonialsSection.
 
 
 const sliderBtns = testimonialsSection.querySelectorAll(".slider-btn");
-const previousNextBtns = testimonialsSection.querySelectorAll(".control-btn");
+const previousBtn = testimonialsSection.querySelector(".previous-btn");
+const nextBtn = testimonialsSection.querySelector(".next-btn");
 
 
 // Global variable
@@ -30,11 +31,9 @@ let counter = 0;
 let breakpointsReached = [];
 
 // The width of the testimonial box
-let testimonialWidth = parseInt(
-  window.getComputedStyle(document.documentElement).getPropertyValue(
-    "--testimonial-width"
-  )
-);
+let testimonialValues,
+  testimonialWidth,
+  testimonialGap;
 
 
 // Handling the first load of the page
@@ -90,6 +89,16 @@ function checkInput() {
 // Function => Handling how different elements are going to appear on different screen sizes
 function handleResizing() {
 
+  testimonialValues = window.getComputedStyle(document.documentElement);
+  testimonialWidth = parseInt(
+    testimonialValues.getPropertyValue(
+      "--testimonial-width"
+    )
+  );
+  testimonialGap = parseInt(
+    testimonialValues.getPropertyValue("--testimonial-gap")
+  );
+
   let windowWidth = window.innerWidth;
 
   if (windowWidth > 1200) {
@@ -107,14 +116,15 @@ function handleResizing() {
     }
 
   }
+  testimonialsContaner.innerHTML = testimonialsMarkup;
 
   if (windowWidth > 768) {
 
-    for (let i = 0; i < 3; i++) {
+    // for (let i = 0; i < 3; i++) {
 
-      testimonialsContaner.innerHTML += testimonialsMarkup;
+    //   testimonialsContaner.innerHTML += testimonialsMarkup;
 
-    }
+    // }
 
     testimonialsSection.classList.add("desktop");
 
@@ -176,31 +186,55 @@ function handleSliderBtns() {
 // Function => handling previous and next buttons
 function handlePreviousNextBtns() {
 
-  previousNextBtns.forEach(btn => {
+  // Next Button
+  nextBtn.addEventListener("click", () => {
 
-    btn.addEventListener("click", (e) => {
+    let clone = testimonialsContaner.firstElementChild.cloneNode(true);
+    let firstAnimation = true;
 
-      if (counter % 4 === 0 && !breakpointsReached.includes(counter)) {
+    testimonialsContaner.style.animation = "move-left .5s linear";
+    nextBtn.style.pointerEvents = "none";
 
-        breakpointsReached.unshift(counter);
-        testimonialsContaner.innerHTML += testimonialsMarkup;
+    testimonialsContaner.addEventListener("animationend", () => {
+
+      if (firstAnimation) {
+
+        testimonialsContaner.insertAdjacentElement("beforeend", clone)
+        testimonialsContaner.firstElementChild.remove();
+        firstAnimation = false;
 
       }
 
-      let containerOffset = testimonialsContaner.offsetLeft;
+      nextBtn.style.pointerEvents = "all";
+      testimonialsContaner.style.animation = "none";
 
-      if (e.target.dataset.direction === "1") {
-        counter++;
+    });
 
-        testimonialsContaner.style.left = containerOffset - (testimonialWidth / 2) + "px";
-      } else {
-        counter--;
+  });
 
-        testimonialsContaner.style.left = containerOffset + (testimonialWidth / 2) + "px";
+
+  previousBtn.addEventListener("click", () => {
+
+    let clone = testimonialsContaner.lastElementChild.cloneNode(true);
+    let firstAnimation = true;
+
+    testimonialsContaner.style.animation = "move-right .5s linear";
+    previousBtn.style.pointerEvents = "none";
+
+    testimonialsContaner.addEventListener("animationend", () => {
+
+      if (firstAnimation) {
+
+        testimonialsContaner.insertAdjacentElement("afterbegin", clone)
+        testimonialsContaner.lastElementChild.remove();
+        firstAnimation = false;
+
       }
 
-    })
+      previousBtn.style.pointerEvents = "all";
+      testimonialsContaner.style.animation = "none";
 
-  })
+    });
 
+  });
 }

@@ -6,6 +6,11 @@
 
 :root {
   --testimonial-width: 500px;
+  --testimonial-gap: 32px;
+
+  @include max-mq(1200px) {
+    --testimonial-width: 350px;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -503,6 +508,10 @@ main {
           align-items: center;
           padding: 1rem;
           cursor: pointer;
+
+          @include min-mq(2100px) {
+            display: none;
+          }
         }
 
         .previous-btn {
@@ -516,11 +525,24 @@ main {
         .container {
           width: max-content;
           display: flex;
-          gap: 2rem;
+          gap: var(--testimonial-gap);
           position: relative;
           left: 50%;
           margin: 0;
           transform: translateX(-50%);
+          // animation: move-left 2s linear 1s;
+
+          @keyframes move-left {
+            100% {
+              left: calc(50% - var(--testimonial-width) - var(--testimonial-gap));
+            }
+          }
+
+          @keyframes move-right {
+            100% {
+              left: calc(50% + var(--testimonial-width) + var(--testimonial-gap));
+            }
+          }
 
           .testimonial {
             display: block;
@@ -680,7 +702,7 @@ main {
 
     .links-container {
       grid-area: links;
-      padding: 0;
+      margin: 0;
     }
 
     .logo {
