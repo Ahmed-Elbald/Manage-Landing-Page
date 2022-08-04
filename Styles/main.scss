@@ -381,15 +381,6 @@ main {
       margin-left: auto;
     }
 
-    // .section__intro {
-    //   margin: 0 auto 3rem;
-
-    //   @include min-mq($mq) {
-    //     margin-right: 0;
-    //     margin-left: 0;
-    //   }
-    // }
-
 
     .section__content {
       padding-left: 1rem;
@@ -458,6 +449,7 @@ main {
 
       .container {
         transition-duration: .5s;
+        user-select: none;
 
         &.fade {
           opacity: 0;

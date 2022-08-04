@@ -24,7 +24,11 @@ const nextBtn = testimonialsSection.querySelector(".next-btn");
 
 
 // Global variable
-let prevent = true; // Should the form get prevented from being submitted ?
+let prevent = true;
+let initialPosition,
+  lastPosition,
+  difference = 0,
+  lastDiference = 0;
 
 
 
@@ -32,11 +36,17 @@ let prevent = true; // Should the form get prevented from being submitted ?
 document.addEventListener("DOMContentLoaded", () => {
 
   handleResizing();
-
   window.addEventListener("resize", () => handleResizing());
 
+
   handleSliderBtns();
-  handlePreviousNextBtns()
+  handlePreviousNextBtns();
+
+
+  testimonialsContaner.addEventListener("mousedown", (e) => handleDragging(e));
+  testimonialsContaner.onmouseup = () => { stopMousemove() }
+  testimonialsContaner.onmouseleave = () => { stopMousemove() }
+
 
   navToggleBtn.addEventListener("click", () => manageNav());
 
@@ -177,54 +187,91 @@ function handleSliderBtns() {
 function handlePreviousNextBtns() {
 
   // Next Button
-  nextBtn.addEventListener("click", () => {
+  nextBtn.addEventListener("click", () => manageSlide("left"));
 
-    let clone = testimonialsContaner.firstElementChild.cloneNode(true);
-    let firstAnimation = true;
+  // Previous Button
+  previousBtn.addEventListener("click", () => manageSlide("right"));
 
-    testimonialsContaner.style.animation = "move-left .5s linear";
-    nextBtn.style.pointerEvents = "none";
+}
 
-    testimonialsContaner.addEventListener("animationend", () => {
 
-      if (firstAnimation) {
+// Functoin => Handle dragging on the testimonialsContainer
+function handleDragging(downEvent) {
 
-        testimonialsContaner.insertAdjacentElement("beforeend", clone)
-        testimonialsContaner.firstElementChild.remove();
-        firstAnimation = false;
+  let counter = 0;
+
+
+  if (downEvent.button === 0) {
+
+    initialPosition = downEvent.pageX;
+
+  }
+
+
+  testimonialsContaner.onmousemove = (moveEvent) => {
+    lastPosition = moveEvent.pageX;
+    difference = lastPosition - initialPosition;
+
+    if (counter === 0) {
+
+      counter = 1;
+
+      if (difference < 0) {
+
+        manageSlide("left")
+
+      } else if (difference > 0) {
+
+        manageSlide("right")
 
       }
 
-      nextBtn.style.pointerEvents = "all";
-      testimonialsContaner.style.animation = "none";
+    }
 
-    });
-
-  });
+  }
 
 
-  previousBtn.addEventListener("click", () => {
+}
 
-    let clone = testimonialsContaner.lastElementChild.cloneNode(true);
-    let firstAnimation = true;
 
+// Function => Stop the mousemove event from making any changes
+function stopMousemove() {
+  testimonialsContaner.onmousemove = () => { return }
+}
+
+
+// Function => Hanlde the direction of the slide
+function manageSlide(direction) {
+  let clone;
+
+  if (direction === "right") {
+    clone = testimonialsContaner.lastElementChild.cloneNode(true);
     testimonialsContaner.style.animation = "move-right .5s linear";
     previousBtn.style.pointerEvents = "none";
 
-    testimonialsContaner.addEventListener("animationend", () => {
+    testimonialsContaner.onanimationend = () => {
 
-      if (firstAnimation) {
-
-        testimonialsContaner.insertAdjacentElement("afterbegin", clone)
-        testimonialsContaner.lastElementChild.remove();
-        firstAnimation = false;
-
-      }
+      testimonialsContaner.insertAdjacentElement("afterbegin", clone)
+      testimonialsContaner.lastElementChild.remove();
 
       previousBtn.style.pointerEvents = "all";
       testimonialsContaner.style.animation = "none";
 
-    });
+    }
+  } else {
+    clone = testimonialsContaner.firstElementChild.cloneNode(true);
+    testimonialsContaner.style.animation = "move-left .5s linear";
+    nextBtn.style.pointerEvents = "none";
 
-  });
+    testimonialsContaner.onanimationend = () => {
+
+      testimonialsContaner.insertAdjacentElement("beforeend", clone)
+      testimonialsContaner.firstElementChild.remove();
+
+      nextBtn.style.pointerEvents = "all";
+      testimonialsContaner.style.animation = "none";
+
+    }
+  }
+
 }
