@@ -25,10 +25,6 @@ const nextBtn = testimonialsSection.querySelector(".next-btn");
 
 // Global variable
 let prevent = true;
-let initialPosition,
-  lastPosition,
-  difference = 0,
-  lastDiference = 0;
 
 
 
@@ -199,7 +195,7 @@ function handlePreviousNextBtns() {
 function handleDragging(downEvent) {
 
   let counter = 0;
-
+  let initialPosition, lastPosition, difference;
 
   if (downEvent.button === 0) {
 
