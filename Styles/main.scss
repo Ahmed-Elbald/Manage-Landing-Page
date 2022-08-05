@@ -572,7 +572,7 @@ main {
           left: 50%;
           margin: 0;
           transform: translateX(-50%);
-          // animation: move-left 2s linear 1s;
+          cursor: url(../images/cursor-grab-removebg-preview.png) 5 5, auto;
 
           @keyframes move-left {
             100% {

@@ -201,6 +201,7 @@ function handleDragging(downEvent) {
 
     initialPosition = downEvent.pageX;
 
+
   }
 
 
@@ -208,21 +209,18 @@ function handleDragging(downEvent) {
     lastPosition = moveEvent.pageX;
     difference = lastPosition - initialPosition;
 
-    if (counter === 0) {
+    console.log("good")
 
-      counter = 1;
+    if (difference < 0) {
 
-      if (difference < 0) {
+      manageSlide("left")
 
-        manageSlide("left")
+    } else if (difference > 0) {
 
-      } else if (difference > 0) {
-
-        manageSlide("right")
-
-      }
+      manageSlide("right")
 
     }
+
 
   }
 
@@ -244,6 +242,7 @@ function manageSlide(direction) {
     clone = testimonialsContaner.lastElementChild.cloneNode(true);
     testimonialsContaner.style.animation = "move-right .5s linear";
     previousBtn.style.pointerEvents = "none";
+
 
     testimonialsContaner.onanimationend = () => {
 
@@ -269,5 +268,7 @@ function manageSlide(direction) {
 
     }
   }
+
+  // testimonialsContaner.classList.remove("grapped");
 
 }
